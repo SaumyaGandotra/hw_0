@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+#This sampels random lines from an input file.
+=======
+#This script randomly samples lines from a file.
+>>>>>>> hw_1b
+import sys 
+import random 
+
+filename = sys.argv[1]
+with open(filename, 'r') as f:
+    for line in f:
+        if random.random() < 0.01:
+            print(line, end='')
