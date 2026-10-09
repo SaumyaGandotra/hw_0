@@ -1,3 +1,4 @@
+#This sampels random lines from an input file.
 import sys 
 import random 
 
