@@ -38,6 +38,7 @@ def time_view(request):
 def sum_view(request):
     n1 = float(request.GET.get('n1', 0))
     n2 = float(request.GET.get('n2', 0))
+    result = n1 + n2
     return HttpResponse(f"<p>{result}</p>")
 
 
