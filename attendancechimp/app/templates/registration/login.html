@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html><head><title>Login</title></head>
+<html>
+<head><title>Login - AttendanceChimp</title></head>
 <body style="text-align:center; font-family:Arial;">
 <h1>Log In</h1>
-
+<form method="POST">
+    {% csrf_token %}
+    <p><label>Username: <input type="text" name="username"></label></p>
+    <p><label>Password: <input type="password" name="password"></label></p>
+    <p><button type="submit">Log In</button></p>
+</form>
 </body>
 </html>

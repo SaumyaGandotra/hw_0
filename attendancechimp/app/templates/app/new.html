@@ -1,0 +1,27 @@
+<!-- Note: Claude was used to understand the HTML syntax a little bit better, particularly for spacing, label and the p tag strucure. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - AttendanceChimp</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+        form { display: inline-block; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form action="/app/createUser" method="POST">
+        {% csrf_token %}
+        <p><label>Username: <input type="text" name="user_name"></label></p>
+        <p><label>Email: <input type="email" name="email"></label></p>
+        <p><label>Password: <input type="password" name="password"></label></p>
+        <p>Role:
+            <label><input type="radio" name="is_student" value="1"> Student</label>
+            <label><input type="radio" name="is_student" value="0"> Instructor</label>
+        </p>
+        <p><button type="submit">Sign Up</button></p>
+    </form>
+</body>
+</html>
+
