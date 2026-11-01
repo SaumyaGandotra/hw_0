@@ -14,6 +14,15 @@
     <h1>AttendanceChimp</h1>
     <p>Electronic class attendance tracking application.</p>
     <hr>
+    <p>This is useful to track your attendance easily using QR codes. 
+    <p>Current Time (CST): {{current_time}}</p>
+    <p>Logged in as:
+    	{% if user.is_authenticated %}
+		<span class="username">{{ user.username }}</span>
+	{% else %}
+		Not logged in. 
+	{% endif %}
+    </p>
 
 </div>
 </body>

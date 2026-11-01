@@ -30,16 +30,57 @@ CDT = zoneinfo.ZoneInfo("America/Chicago")
 def index(request):
     """Render the home page (index.html)."""
 
-    context = {}
+    now = datetime.now(tz=CDT)
+    context = {
+	'current_time': now.strftime("%H:%M")
+    }
     return render(request, 'app/index.html', context)
 
+def time_view(request):
+    now = datetime.now(tz=CDT)
+    return HttpResponse(now.strftime("%H:%M"))
+
+def sum_view(request):
+    n1 = float(request.GET.get('n1', 0))
+    n2 = float(request.GET.get('n2', 0))
+    result = n1 + n2
+    return HttpResponse(f"<p>{result}</p>")
 
 
 # ---------------------------------------------------------------------------
 # HW4  — user creation
 # ---------------------------------------------------------------------------
+def new_user(request):
+    """Display the sign up forms, only accepts GET requests."""
+    if request.method =='POST':
+        return HttpResponseBadRequest("POST is not allowed on this endpoint.")
+    return render(request, 'app/new.html', {})
 
+@csrf_exempt
+def createUser(request):
+    """Creates a new User, only accepts POST requests."""
+    if request.method == 'GET':
+        return HttpResponseBadRequest("GET not allowed on this endpoint.")
 
+    email = request.POST.get('email')
+    user_name = request.POST.get('user_name')
+    password = request.POST.get('password')
+    is_student = request.POST.get('is_student')
+
+    if User.objects.filter(email=email).exists():
+        return HttpResponseBadRequest("A user with this email already exists.")
+
+    user = User.objects.create_user(username=user_name, email=email, password=password)
+
+    if is_student == '1':
+        from .models import StudentProfile
+        StudentProfile.objects.create(user=user)
+    else:
+        from .models import InstructorProfile
+        InstructorProfile.objects.create(user=user)
+
+    login(request, user)
+    return HttpResponse("User has been created successfully.")
 
 # ---------------------------------------------------------------------------
 # HW5  — courses, lectures, QR uploads, dump
