@@ -19,7 +19,10 @@ import io
 #from .models import (InstructorProfile, StudentProfile, Course, Enrollment,
 #                      Lecture, QRCodeUpload, is_instructor, is_student,
 #                      getUploadsForCourse)
-from .models import InstructorProfile, StudentProfile
+try:
+    from .models import InstructorProfile, StudentProfile
+except ImportError:
+    pass
 CDT = zoneinfo.ZoneInfo("America/Chicago")
 
 
