@@ -78,11 +78,17 @@ def createUser(request):
     user = User.objects.create_user(username=user_name, email=email, password=password)
 
     if is_student == '1':
-        from .models import StudentProfile
-        StudentProfile.objects.create(user=user)
+        try:
+            from .models import StudentProfile
+            StudentProfile.objects.create(user=user)
+        except ImportError:
+            pass
     else:
-        from .models import InstructorProfile
-        InstructorProfile.objects.create(user=user)
+        try:
+            from .models import InstructorProfile
+            InstructorProfile.objects.create(user=user)
+        except ImportError:
+            pass
 
     login(request, user)
     return HttpResponse("User has been created successfully.")
