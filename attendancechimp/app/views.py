@@ -16,10 +16,10 @@ import zoneinfo
 import json
 import io
 
-# from .models import (InstructorProfile, StudentProfile, Course, Enrollment,
+#from .models import (InstructorProfile, StudentProfile, Course, Enrollment,
 #                      Lecture, QRCodeUpload, is_instructor, is_student,
 #                      getUploadsForCourse)
-
+from .models import InstructorProfile, StudentProfile
 CDT = zoneinfo.ZoneInfo("America/Chicago")
 
 
@@ -69,6 +69,8 @@ def createUser(request):
 
     if User.objects.filter(email=email).exists():
         return HttpResponseBadRequest("A user with this email already exists.")
+    if User.objects.filter(username=user_name).exists():
+        return HttpResponseBadRequest("A user with this username already exists.")
 
     user = User.objects.create_user(username=user_name, email=email, password=password)
 
