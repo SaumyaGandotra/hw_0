@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>New Lecture: Attendance Chimp</title></head>
+<body style="text-align:center; font-family: Arial;">
+<h1>Create Lecture</h1>
+<form action="/app/createLecture" method="POST">
+    {% csrf_token %}
+    <p><label>Course ID: <input type="text" name="course_id"></label></p>
+    <p><label>Dates: <input type="text" name="date"></label></p>
+    <p><button type="submit">Create Lecture</button></p>
+</form>
+</body>
+</html>
