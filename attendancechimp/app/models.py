@@ -75,7 +75,7 @@ class Enrollment(models.Model):
 class Lecture(models.Model):
     """A single class meeting associated with a course. It has a unique QR code identifier for attendance tracking."""
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True, blank=True)
     qr_code = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
