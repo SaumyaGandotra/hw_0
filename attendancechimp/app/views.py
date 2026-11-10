@@ -20,7 +20,7 @@ import io
 #                      Lecture, QRCodeUpload, is_instructor, is_student,
 #                      getUploadsForCourse)
 try:
-    from .models import InstructorProfile, StudentProfile
+    from .models import (InstructorProfile, StudentProfile, Course, Lecture, QRCodeUpload)
 except ImportError:
     pass
 CDT = zoneinfo.ZoneInfo("America/Chicago")
@@ -121,9 +121,8 @@ def createCourse(request):
       return HttpResponse("Not logged in.", status=401)
 
    try:
-      from .models import InstructorProfile, Course
       instructor = InstructorProfile.objects.get(user=request.user)
-   except InstructorProfile.DoesNotExist:
+   except:
       return HttpResponse("Only instructors can create courses.", status=401)
 
    course_name = request.POST.get('course-name')
@@ -152,10 +151,9 @@ def createLecture(request):
    if not request.user.is_authenticated:
       return HttpResponse("Not logged in.", status=401)
     
-   try:
-      from .models import InstructorProfile, Course, Lecture  
+   try:  
       instructor = InstructorProfile.objects.get(user=request.user)
-   except InstructorProfile.DoesNotExist:
+   except:
       return HttpResponse("Only instructors can create lectures.", status=401)
         
    course_name = request.POST.get('choice')
@@ -187,9 +185,8 @@ def createQRCodeUpload(request):
       return HttpResponse("Not logged in.", status=401)
        
    try:
-      from .models import StudentProfile, QRCodeUpload, Lecture
       student = StudentProfile.objects.get(user=request.user)
-   except StudentProfile.DoesNotExist:
+   except:
       return HttpResponse("Only students can upload QR codes.", status=401)
 
    image = request.FILES.get('imageUpload')
@@ -213,9 +210,8 @@ def dumpUploads(request):
    if not request.user.is_authenticated:
       return HttpResponse("Not logged in.", status=401)
    try:
-      from .models import InstructorProfile, QRCodeUpload
       InstructorProfile.objects.get(user=request.user)
-   except InstructorProfile.DoesNotExist:
+   except:
       return HttpResponse("Only instructors can view uploads.", status=401)
 
    uploads = QRCodeUpload.objects.all()
