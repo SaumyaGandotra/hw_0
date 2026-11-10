@@ -126,7 +126,7 @@ def createCourse(request):
    except InstructorProfile.DoesNotExist:
       return HttpResponse("Only instructors can create courses.", status=401)
 
-   course_name = request.POST.get('course_name')
+   course_name = request.POST.get('course-name')
    meeting_days = []
    for day in ['mon', 'tue', 'wed','thu','fri']:
       if request.POST.get(f'day-{day}'):
@@ -158,7 +158,7 @@ def createLecture(request):
    except InstructorProfile.DoesNotExist:
       return HttpResponse("Only instructors can create lectures.", status=401)
         
-   course_name = request.POST.get('course_name')
+   course_name = request.POST.get('choice')
    
    try:
       course = Course.objects.get(name=course_name)

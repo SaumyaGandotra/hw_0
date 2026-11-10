@@ -6,7 +6,7 @@
 <form action="/app/createQRCodeUpload" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <p><label>Lecture ID: <input type="text" name="lecture_id"></label></p>
-    <p><label>Image: <input type="file" name="image"></label></p>
+    <p><label>Image: <input type="file" name="imageUpload"></label></p>
     <p><button type="submit">Upload</button></p>
 </form>
 </body>

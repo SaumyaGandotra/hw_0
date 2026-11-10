@@ -5,9 +5,16 @@
 <h1>Create Course</h1>
 <form action="/app/createCourse" method="POST">
     {% csrf_token %}
-    <p><label>Course Name: <input type="text" name="course_name"></label></p>
-    <p><label>Meeting Days: <input type="text" name="meeting_days"></label></p>
-    <p><label>Meeting Time: <input type="text" name="meeting_time"></label></p>
+    <p><label>Course Name: <input type="text" name="course-name"></label></p>
+    <p><label>Start Time: <input type="text" name="start-time"></label></p>
+    <p><label>End Time: <input type="text" name="end-time"></label></p>
+    <p>Days:
+        <label><input type="checkbox" name="day-mon"> Mon</label>
+        <label><input type="checkbox" name="day-tue"> Tue</label>
+        <label><input type="checkbox" name="day-wed"> Wed</label>
+        <label><input type="checkbox" name="day-thu"> Thu</label>
+        <label><input type="checkbox" name="day-fri"> Fri</label>
+    </p>
     <p><button type="submit">Create Course</button></p>
 </form>
 </body>
